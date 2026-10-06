@@ -2,10 +2,13 @@
   "name": "founder-factory",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "frontend"
+  ],
   "scripts": {
     "dev": "node scripts/dev.js",
     "start": "node --env-file=.env backend/server.js",
-    "build": "npm run build --prefix frontend",
+    "build": "node scripts/build.js",
     "lint": "npm run lint --prefix frontend",
     "test": "node --test"
   },
