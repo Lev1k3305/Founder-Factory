@@ -26,7 +26,7 @@ function sendJson(response, statusCode, payload) {
   response.end(JSON.stringify(payload));
 }
 
-function explainGeminiError(error) {
+export function explainGeminiError(error) {
   const status = error?.status;
   const providerMessage = String(error?.message || "");
 
