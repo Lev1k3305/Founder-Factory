@@ -18,7 +18,15 @@ export default async function handler(req, res) {
     });
   }
 
-  const body = req.body;
+  let body = req.body;
+  if (typeof body === "string") {
+    try {
+      body = JSON.parse(body);
+    } catch {
+      // ignore parse error; prompt validation below will handle invalid structure
+    }
+  }
+
   const prompt = body?.prompt;
 
   if (
