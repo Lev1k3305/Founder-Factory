@@ -205,19 +205,12 @@ export function createApiServer(generateContent, { logError = console.error } = 
   });
 }
 
-export function startServer() {
-  const apiKey = process.env.GEMINI_API_KEY;
+export function createConfiguredGenerator(apiKey) {
   if (!apiKey) {
     throw new Error(
       "GEMINI_API_KEY is missing. Copy .env.example to .env and add your key.",
     );
   }
-
-  const port = Number(process.env.PORT || 3001);
-  if (!Number.isInteger(port) || port < 1 || port > 65535) {
-    throw new Error("PORT must be an integer between 1 and 65535.");
-  }
-
   const gemini = new GoogleGenerativeAI(apiKey);
   const models = new Map(
     [GEMINI_MODEL, GEMINI_FALLBACK_MODEL].map((modelName) => [
@@ -225,10 +218,21 @@ export function startServer() {
       gemini.getGenerativeModel({ model: modelName }),
     ]),
   );
-  const generateContent = createGeminiGenerator(async (modelName, prompt) => {
+  return createGeminiGenerator(async (modelName, prompt) => {
     const result = await models.get(modelName).generateContent(prompt);
     return result.response.text();
   });
+}
+
+export function startServer() {
+  const apiKey = process.env.GEMINI_API_KEY;
+  const generateContent = createConfiguredGenerator(apiKey);
+
+  const port = Number(process.env.PORT || 3001);
+  if (!Number.isInteger(port) || port < 1 || port > 65535) {
+    throw new Error("PORT must be an integer between 1 and 65535.");
+  }
+
   const server = createApiServer(generateContent);
 
   server.on("error", (error) => {

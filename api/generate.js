@@ -1,10 +1,5 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import {
-  GEMINI_FALLBACK_MODEL,
-  GEMINI_MODEL,
-} from "../backend/config.js";
-import {
-  createGeminiGenerator,
+  createConfiguredGenerator,
   explainGeminiError,
 } from "../backend/server.js";
 
@@ -37,19 +32,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const gemini = new GoogleGenerativeAI(apiKey);
-    const models = new Map(
-      [GEMINI_MODEL, GEMINI_FALLBACK_MODEL].map((modelName) => [
-        modelName,
-        gemini.getGenerativeModel({ model: modelName }),
-      ]),
-    );
-
-    const generateContent = createGeminiGenerator(async (modelName, text) => {
-      const result = await models.get(modelName).generateContent(text);
-      return result.response.text();
-    });
-
+    const generateContent = createConfiguredGenerator(apiKey);
     const text = await generateContent(prompt);
     if (typeof text !== "string" || !text.trim()) {
       return res.status(502).json({ error: "Gemini returned an empty response." });
