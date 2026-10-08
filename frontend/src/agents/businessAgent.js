@@ -14,5 +14,7 @@ Return:
 - Pricing strategy
 - MVP scope
 - Cost structure
+
+IMPORTANT LANGUAGE REQUIREMENT: Respond in the exact same language as the context provided (e.g. if written in Russian, reply entirely in Russian).
 `);
 }

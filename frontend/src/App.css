@@ -637,6 +637,43 @@ h1 span {
   height: 13px;
 }
 
+.tab-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 16px 0 18px;
+  border-bottom: 1px solid #e8ece5;
+}
+
+.tab-button {
+  padding: 6px 12px;
+  border: 1px solid #e2e7de;
+  border-radius: 20px;
+  color: #5d685e;
+  background: #fcfdfa;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.tab-button:hover:not(.active):not(.disabled) {
+  background: #f1f5eb;
+  border-color: #b9c8aa;
+  color: #263a30;
+}
+
+.tab-button.active {
+  background: #263a30;
+  color: #ffffff;
+  border-color: #263a30;
+}
+
+.tab-button.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .results-content {
   margin-top: 22px;
   color: #4b5950;
@@ -644,6 +681,38 @@ h1 span {
   font-size: 13px;
   line-height: 1.85;
   overflow-wrap: anywhere;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin: 18px 0;
+}
+
+.results-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.results-content th,
+.results-content td {
+  border: 1px solid #e0e5db;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.results-content th {
+  background: #f3f6ef;
+  font-weight: 700;
+  color: #263a30;
+}
+
+.results-content blockquote {
+  border-left: 3px solid #88aa6e;
+  margin: 16px 0;
+  padding-left: 14px;
+  color: #58695d;
+  font-style: italic;
 }
 
 .results-content p {

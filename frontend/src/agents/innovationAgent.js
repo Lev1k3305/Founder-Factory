@@ -21,5 +21,7 @@ Return:
 - Unique, feasible features
 - Competitive advantages
 - Assumptions that need validation
+
+IMPORTANT LANGUAGE REQUIREMENT: Respond in the exact same language as the user's startup idea above (e.g. if written in Russian, reply entirely in Russian).
 `);
 }
